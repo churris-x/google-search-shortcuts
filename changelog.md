@@ -1,3 +1,6 @@
+1.1.19
+- Add bindings for other Google tabs
+
 1.1.18
 - Further restricted domains the extension will run on
 
