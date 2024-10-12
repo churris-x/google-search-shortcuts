@@ -1,20 +1,18 @@
-(function () {
-  'use strict';
 
-  // Enforce that the script is only run on search result pages (Google Search or Google Scholar)
-  const isResultsPage = document.querySelector('html[itemtype="http://schema.org/SearchResultsPage"], .gs_r');
-  if (!isResultsPage) {
-    return;
-  }
+'use strict';
 
-  // Globals
-  const KEYS = {UP: 38, DOWN: 40, TAB: 9, A: 65, I: 73, J: 74, K: 75, M: 77, V: 86, SLASH: 191, ESC: 27};
+// Enforce that the script is only run on search result pages (Google Search or Google Scholar)
+const isResultsPage = document.querySelector('html[itemtype="http://schema.org/SearchResultsPage"], .gs_r');
+if (isResultsPage) {
+  initShortcuts();
+}
 
-  const addHighlightStyles = (options) => {
+function initShortcuts() {
+  const addHighlightStyles = ({ styleSelectedSimple, styleSelectedFancy }) => {
     const body = document.body;
-    if (options.styleSelectedSimple || options.styleSelectedFancy) body.classList.add('useHighlight');
-    if (options.styleSelectedSimple) body.classList.add('useSimpleHighlight');
-    if (options.styleSelectedFancy) body.classList.add('useFancyHighlight');
+    if (styleSelectedSimple || styleSelectedFancy) body.classList.add('useHighlight');
+    if (styleSelectedSimple) body.classList.add('useSimpleHighlight');
+    if (styleSelectedFancy) body.classList.add('useFancyHighlight');
   };
 
   const addNavigationListener = (options) => {
@@ -27,73 +25,64 @@
 
     const navigateToMaps = () => {
       const searchInput = document.querySelector('input[name="q"]');
-
       if (searchInput) {
         const searchQuery = encodeURIComponent(searchInput.value);
-
-        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
-        window.location.href = mapsUrl;
+        window.location.href = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
       }
     }
 
     window.addEventListener('keydown', (event) => {
-      const keyPressed = event.keyCode;
-
       const isInput = shortcuts.isInputActive();
 
+      // Handle Google shortcuts
       if (options.enableGoogleShortcuts && !isInput && !(event.altKey || event.metaKey || event.ctrlKey)) {
-        if (keyPressed === KEYS.A) {    // A for All
-          navigateToTab('a[href^="/search"][href*="q="]:not([href*="tbm="]):not([href*="udm="])');
-          return
-        } else if (keyPressed === KEYS.I) {    // I for images
-          navigateToTab('a[href*="tbm=isch"], a[href*="udm=2&"], a[href$="udm=2"]')
-          return
-        } else if (keyPressed === KEYS.V) {    // V for videos
-          navigateToTab('a[href*="tbm=vid"], a[href*="udm=7&"], a[href$="udm=7"]')
-          return
-        } else if (keyPressed === KEYS.M) {    // M for maps
-          navigateToMaps()
-          return
+        switch (event.key) {
+          case 'A':  // A for All
+            navigateToTab('a[href^="/search"][href*="q="]:not([href*="tbm="]):not([href*="udm="])');
+            return;
+          case 'I':  // I for Images
+            navigateToTab('a[href*="tbm=isch"], a[href*="udm=2&"], a[href$="udm=2"]');
+            return;
+          case 'V':  // V for Videos
+            navigateToTab('a[href*="tbm=vid"], a[href*="udm=7&"], a[href$="udm=7"]');
+            return;
+          case 'M':  // M for Maps
+            navigateToMaps();
+            return;
+          default:
+            break;
         }
       }
 
-      const isInputOrModifierActive = isInput || shortcuts.hasModifierKey(event),
+      const isInputOrModifierActive = isInput || shortcuts.hasModifierKey(event);
 
-        // From https://stackoverflow.com/questions/12467240/determine-if-javascript-e-keycode-is-a-printable-non-control-character
-        isPrintable = (keyPressed >= 48 && keyPressed <= 57) || // number keys
-          (keyPressed >= 65 && keyPressed <= 90) || // letter keys
-          (keyPressed >= 96 && keyPressed <= 111) || // numpad keys
-          (keyPressed >= 186 && keyPressed <= 192) || // ;=,-./` (in order)
-          (keyPressed >= 219 && keyPressed <= 222),   // [\]' (in order)
+      const shouldNavigateNext = (options.navigateWithArrows && event.key === 'ArrowDown' && !isInputOrModifierActive) ||
+        (options.navigateWithTabs && event.key === 'Tab' && !event.shiftKey) ||
+        (options.navigateWithJK && event.key === 'j' && !isInputOrModifierActive);
 
-        shouldNavigateNext = (options.navigateWithArrows && keyPressed === KEYS.DOWN && !isInputOrModifierActive) ||
-          (options.navigateWithTabs && keyPressed === KEYS.TAB && !event.shiftKey) ||
-          (options.navigateWithJK && keyPressed === KEYS.J && !isInputOrModifierActive),
-
-        shouldNavigateBack = (options.navigateWithArrows && keyPressed === KEYS.UP && !isInputOrModifierActive) ||
-          (options.navigateWithTabs && keyPressed === KEYS.TAB && event.shiftKey) ||
-          (options.navigateWithJK && keyPressed === KEYS.K && !isInputOrModifierActive),
-
-        shouldActivateSearch = !isInputOrModifierActive && (
-          (options.activateSearch === true && isPrintable) ||
-          (options.activateSearch !== false && keyPressed === options.activateSearch)
-        ),
-
-        shouldActivateSearchAndHighlightText = !isInputOrModifierActive && options.selectTextInSearchbox && keyPressed === KEYS.ESC;
+      const shouldNavigateBack = (options.navigateWithArrows && event.key === 'ArrowUp' && !isInputOrModifierActive) ||
+        (options.navigateWithTabs && event.key === 'Tab' && event.shiftKey) ||
+        (options.navigateWithJK && event.key === 'k' && !isInputOrModifierActive);
 
       if (shouldNavigateNext || shouldNavigateBack) {
         event.preventDefault();
         event.stopPropagation();
         shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
-      } else if (shouldActivateSearch) {
-        // Otherwise, force caret to end of text and focus the search box
-        if (options.addSpaceOnFocus) {
-          searchBox.value += ' ';
-        }
+        return
+      }
+
+      const isPrintable = /^[a-z0-9!"#$%&'()*+,.\/:;<=>?@\[\] ^_`{|}~-]*$/i.test(event.key);
+
+      // Activate search: force caret to end of text and focus the search box
+      if (!isInputOrModifierActive && options.activateSearch && isPrintable) {
+        if (options.addSpaceOnFocus) searchBox.value += ' ';
         const searchBoxLength = searchBox.value.length;
         searchBox.focus();
         searchBox.setSelectionRange(searchBoxLength, searchBoxLength);
-      } else if (shouldActivateSearchAndHighlightText) {
+        return
+      }
+
+      if (!isInputOrModifierActive && options.selectTextInSearchbox && event.key === 'Escape') {
         window.scrollTo(0, 0);
         searchBox.focus();
         searchBox.select();
@@ -101,24 +90,19 @@
     });
 
     window.addEventListener('keyup', (event) => {
-      if (!shortcuts.isInputActive() && !shortcuts.hasModifierKey(event) && options.navigateWithJK && event.keyCode === KEYS.SLASH) {
-        if (options.addSpaceOnFocus) {
-          searchBox.value += ' ';
-        }
+      if (!shortcuts.isInputActive() && !shortcuts.hasModifierKey(event) && options.navigateWithJK && event.key === '/') {
+        if (options.addSpaceOnFocus) searchBox.value += ' ';
         searchBox.focus();
       }
     });
   };
 
-  // Load options
   shortcuts.loadOptions((options) => {
     addHighlightStyles(options);
     addNavigationListener(options);
 
     // Auto select the first search result
-    if (options.autoselectFirst === true) {
-      shortcuts.focusResult(1);
-    }
+    if (options.autoselectFirst) shortcuts.focusResult(1);
   });
+}
 
-})();

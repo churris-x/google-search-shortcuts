@@ -1,26 +1,26 @@
-(function() {
-  'use strict';
 
-  // Get manifest data
+function createNotification(title, message) {
+  const options = {
+    type: 'basic',
+    iconUrl: '../img/icon128.png',
+    title: title,
+    message: message,
+  };
+
+  chrome.notifications.create(undefined, options);
+}
+
+// Event listener for installation and updates
+chrome.runtime.onInstalled.addListener(details => {
   const manifestData = chrome.runtime.getManifest();
+  let message;
 
-  // Display one-time installation and update messages
-  chrome.runtime.onInstalled.addListener(function(details) {
-    let options = {
-      type: 'basic',
-      title: manifestData.name
-    };
+  if (details.reason === 'install') {
+    message = `Thank you for installing ${manifestData.name}`;
+  } else if (details.reason === 'update') {
+    message = `${manifestData.name} has been updated to version ${manifestData.version}`;
+  }
 
-    // The extension was freshly installed
-    if (details.reason === 'install') {
-      options.message = "Thank you for installing " + manifestData.name;
-    }
-    // The extension has been updated
-    else if (details.reason === 'update') {
-      options.message = manifestData.name + " has been updated to version " + manifestData.version;
-    }
+  createNotification(manifestData.name, message);
+});
 
-    chrome.notifications.create(null, options);
-  });
-
-})();

@@ -1,61 +1,62 @@
-(function() {
-  'use strict';
 
-  var extOptions = {};
+'use strict';
 
-  function displayDialog() {
-    document.getElementById('dialog').style.marginTop = '0px';
-    setTimeout(function() {
-      document.getElementById('dialog').style.marginTop = '-100px';
-    }, 5000);
-  }
+var extOptions = {};
 
-  function loadFormOptions() {
-    document.getElementById('navigateWithTabs').checked = extOptions.navigateWithTabs;
-    document.getElementById('navigateWithArrows').checked = extOptions.navigateWithArrows;
-    document.getElementById('navigateWithJK').checked = extOptions.navigateWithJK;
-    document.getElementById('styleSelectedSimple').checked = extOptions.styleSelectedSimple;
-    document.getElementById('styleSelectedFancy').checked = extOptions.styleSelectedFancy;
-    document.getElementById('activateSearch').checked = extOptions.activateSearch;
-    document.getElementById('autoselectFirst').checked = extOptions.autoselectFirst;
-    document.getElementById('selectTextInSearchbox').checked = extOptions.selectTextInSearchbox;
-    document.getElementById('addSpaceOnFocus').checked = extOptions.addSpaceOnFocus;
-    document.getElementById('enableGoogleShortcuts').checked = extOptions.enableGoogleShortcuts;
-  }
+// Function to display a temporary dialog message
+const displayDialog = () => {
+  const dialog = document.getElementById('dialog');
+  dialog.style.marginTop = '0px';
 
-  function saveOptions() {
-    extOptions.navigateWithTabs = document.getElementById('navigateWithTabs').checked === true;
-    extOptions.navigateWithArrows = document.getElementById('navigateWithArrows').checked === true;
-    extOptions.navigateWithJK = document.getElementById('navigateWithJK').checked === true;
-    extOptions.styleSelectedSimple = document.getElementById('styleSelectedSimple').checked === true;
-    extOptions.styleSelectedFancy = document.getElementById('styleSelectedFancy').checked === true;
-    extOptions.activateSearch = document.getElementById('activateSearch').checked === true;
-    extOptions.autoselectFirst = document.getElementById('autoselectFirst').checked === true;
-    extOptions.selectTextInSearchbox = document.getElementById('selectTextInSearchbox').checked === true;
-    extOptions.addSpaceOnFocus = document.getElementById('addSpaceOnFocus').checked === true;
-    extOptions.enableGoogleShortcuts = document.getElementById('enableGoogleShortcuts').checked === true;
-    persistOptions();
-  }
+  setTimeout(() => {
+    dialog.style.marginTop = '-100px';
+  }, 5000);
+}
 
-  function restoreDefaults() {
-    extOptions = shortcuts.defaultOptions;
-    persistOptions();
-  }
+const loadFormOptions = () => {
+  document.getElementById('navigateWithTabs').checked = extOptions.navigateWithTabs;
+  document.getElementById('navigateWithArrows').checked = extOptions.navigateWithArrows;
+  document.getElementById('navigateWithJK').checked = extOptions.navigateWithJK;
+  document.getElementById('styleSelectedSimple').checked = extOptions.styleSelectedSimple;
+  document.getElementById('styleSelectedFancy').checked = extOptions.styleSelectedFancy;
+  document.getElementById('activateSearch').checked = extOptions.activateSearch;
+  document.getElementById('autoselectFirst').checked = extOptions.autoselectFirst;
+  document.getElementById('selectTextInSearchbox').checked = extOptions.selectTextInSearchbox;
+  document.getElementById('addSpaceOnFocus').checked = extOptions.addSpaceOnFocus;
+  document.getElementById('enableGoogleShortcuts').checked = extOptions.enableGoogleShortcuts;
+};
 
-  function persistOptions() {
-    shortcuts.saveOptions(extOptions, function() {
-      loadFormOptions();
-      displayDialog();
-    });
-  }
+const saveOptions = () => {
+  extOptions.navigateWithTabs = document.getElementById('navigateWithTabs').checked;
+  extOptions.navigateWithArrows = document.getElementById('navigateWithArrows').checked;
+  extOptions.navigateWithJK = document.getElementById('navigateWithJK').checked;
+  extOptions.styleSelectedSimple = document.getElementById('styleSelectedSimple').checked;
+  extOptions.styleSelectedFancy = document.getElementById('styleSelectedFancy').checked;
+  extOptions.activateSearch = document.getElementById('activateSearch').checked;
+  extOptions.autoselectFirst = document.getElementById('autoselectFirst').checked;
+  extOptions.selectTextInSearchbox = document.getElementById('selectTextInSearchbox').checked;
+  extOptions.addSpaceOnFocus = document.getElementById('addSpaceOnFocus').checked;
+  extOptions.enableGoogleShortcuts = document.getElementById('enableGoogleShortcuts').checked;
+  persistOptions();
+};
 
-  // Load options
-  shortcuts.loadOptions(function(options) {
-    extOptions = options;
+const restoreDefaults = () => {
+  extOptions = shortcuts.defaultOptions;
+  persistOptions();
+};
+
+const persistOptions = () => {
+  shortcuts.saveOptions(extOptions, () => {
     loadFormOptions();
-
-    document.getElementById('save').addEventListener('click', saveOptions);
-    document.getElementById('restore').addEventListener('click', restoreDefaults);
+    displayDialog();
   });
+};
 
-})();
+shortcuts.loadOptions(options => {
+  extOptions = options;
+  loadFormOptions();
+
+  document.getElementById('save').addEventListener('click', saveOptions);
+  document.getElementById('restore').addEventListener('click', restoreDefaults);
+});
+

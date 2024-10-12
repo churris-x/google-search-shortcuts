@@ -1,3 +1,4 @@
+
 // Globals
 const shortcuts = {
   defaultOptions: {
@@ -6,7 +7,7 @@ const shortcuts = {
 
     styleSelectedFancy: true,
 
-    // Activate search box. Boolean (activate when any printable key is pressed) or keyCode
+    // Activate search box when any printable key is pressed
     activateSearch: true,
 
     // Automatically select the first search result.
@@ -20,7 +21,7 @@ const shortcuts = {
     // Next = Down; Previous = Up
     navigateWithArrows: true,
 
-    // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
+    // Next = j; Previous = k [WARNING: Conflicts with activateSearch. This takes precedence.]
     navigateWithJK: false,
 
     // Esc = select all text in searchbox
@@ -70,19 +71,19 @@ const shortcuts = {
   navigationContainerQuerySelector: 'div[role="navigation"] table',
   navigationLinksAndSuggestedSearchesQuerySelector: 'div[role="navigation"] table a, #botstuff a',
 
-  saveOptions: function(options, callback) {
+  saveOptions(options, callback) {
     chrome.storage.sync.set(options, callback);
   },
 
-  loadOptions: function(callback) {
+  loadOptions(callback) {
     chrome.storage.sync.get(this.defaultOptions, callback);
   },
 
-  isElementVisible: function(element) {
-    return element && (element.offsetWidth > 0 || element.offsetHeight > 0) && window.getComputedStyle(element, null).getPropertyValue('visibility') !== 'hidden';
+  isElementVisible(element) {
+    return element && (element.offsetWidth > 0 || element.offsetHeight > 0) && window.getComputedStyle(element).visibility !== 'hidden';
   },
 
-  getVisibleResults: function() {
+  getVisibleResults() {
     const containers = [];
     return [
       // Main items
@@ -98,36 +99,32 @@ const shortcuts = {
     ].filter(target => target.container !== null && this.isElementVisible(target.focusElement));
   },
 
-  hasModifierKey: function(e) {
-    return e.shiftKey || e.altKey || e.ctrlKey || e.metaKey;
+  hasModifierKey(event) {
+    return event.shiftKey || event.altKey || event.ctrlKey || event.metaKey;
   },
 
-  /**
-   * Determine if an input element is focused
-   */
-  isInputActive: function() {
+  isInputActive() {
     const activeElement = document.activeElement;
-    return activeElement != null && (activeElement.nodeName === 'INPUT' || this.inputElementTypes.includes(activeElement.type) || this.inputElementIds.includes(activeElement.id));
+    return activeElement && (activeElement.nodeName === 'INPUT' || this.inputElementTypes.includes(activeElement.type) || this.inputElementIds.includes(activeElement.id));
   },
 
-  // -- Highlight the active result
+  // Highlight the active result
   // Results without valid containers will be removed.
-  findContainer: function(link, containers) {
+  findContainer(link, containers) {
     const container = link.closest(this.resultContainerQuerySelector);
 
     // Only return valid, unused containers
-    if (container != null && containers.indexOf(container) < 0) {
+    if (container && !containers.includes(container)) {
       containers.push(container);
       return container;
     }
-
     return null;
   },
 
   // Add custom styling for the selected result (does not apply to footer navigation links)
-  addResultHighlight: function(target) {
+  addResultHighlight(target) {
     // Don't proceed if the result is already highlighted or if we're dealing with footer navigation links
-    if (target.container.classList.contains('activeSearchResultContainer') || target.focusElement.closest(this.navigationContainerQuerySelector) != null) {
+    if (target.container.classList.contains('activeSearchResultContainer') || target.focusElement.closest(this.navigationContainerQuerySelector)) {
       return;
     }
 
@@ -143,26 +140,23 @@ const shortcuts = {
     target.focusElement.addEventListener('blur', removeResultHighlight);
   },
 
-  focusResult: function(offset) {
+  focusResult(offset) {
     const results = this.getVisibleResults();
 
-    if (results.length <= 0) {
-      console.warn('No results found. Extension may need to be updated.');
+    if (results.length === 0) {
       return;
     }
 
     // Shift focusIndex and perform boundary checks
-    this.focusIndex += offset;
-    this.focusIndex = Math.min(this.focusIndex, results.length - 1);
-    this.focusIndex = Math.max(this.focusIndex, 0);
+    this.focusIndex = Math.max(0, Math.min(this.focusIndex + offset, results.length - 1));
 
     const target = results[this.focusIndex];
 
     // Scroll the entire result container into view if it's not already.
     const rect = target.container.getBoundingClientRect();
-    const offsetY = rect.bottom - window.innerHeight;
-    if (offsetY > 0) {
-      window.scrollBy(0, offsetY);
+
+    if (rect.bottom > window.innerHeight) {
+      window.scrollBy(0, rect.bottom - window.innerHeight);
     }
 
     target.focusElement.focus();
