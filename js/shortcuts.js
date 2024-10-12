@@ -8,6 +8,19 @@ if (isResultsPage) {
 }
 
 function initShortcuts() {
+  // If we changed the search, reinitialize selected link index to 0
+  const lastSearchURL = sessionStorage.getItem('lastSearchURL');
+  if (location.href !== lastSearchURL) {
+    sessionStorage.setItem('lastLinkIndex', 0);
+  }
+  sessionStorage.setItem('lastSearchURL', location.href);
+
+  // Focus on saved link index
+  const lastLinkIndex = sessionStorage.getItem('lastLinkIndex');
+  if (lastLinkIndex !== null) {
+    shortcuts.focusResult(lastLinkIndex);
+  }
+
   const addHighlightStyles = ({ styleSelectedSimple, styleSelectedFancy }) => {
     const body = document.body;
     if (styleSelectedSimple || styleSelectedFancy) body.classList.add('useHighlight');
@@ -67,7 +80,7 @@ function initShortcuts() {
       if (shouldNavigateNext || shouldNavigateBack) {
         event.preventDefault();
         event.stopPropagation();
-        shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
+        shortcuts.focusResult(shortcuts.focusIndex + (shouldNavigateNext ? 1 : -1));
         return
       }
 
@@ -102,7 +115,7 @@ function initShortcuts() {
     addNavigationListener(options);
 
     // Auto select the first search result
-    if (options.autoselectFirst) shortcuts.focusResult(1);
+    if (options.autoselectFirst && lastLinkIndex === null) shortcuts.focusResult(0);
   });
 }
 

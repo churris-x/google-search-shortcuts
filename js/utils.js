@@ -140,7 +140,7 @@ const shortcuts = {
     target.focusElement.addEventListener('blur', removeResultHighlight);
   },
 
-  focusResult(offset) {
+  focusResult(resultIndex) {
     const results = this.getVisibleResults();
 
     if (results.length === 0) {
@@ -148,7 +148,7 @@ const shortcuts = {
     }
 
     // Shift focusIndex and perform boundary checks
-    this.focusIndex = Math.max(0, Math.min(this.focusIndex + offset, results.length - 1));
+    this.focusIndex = Math.max(0, Math.min(resultIndex, results.length - 1));
 
     const target = results[this.focusIndex];
 
@@ -161,5 +161,6 @@ const shortcuts = {
 
     target.focusElement.focus();
     this.addResultHighlight(target);
+    sessionStorage.setItem('lastLinkIndex', this.focusIndex);
   }
 };
