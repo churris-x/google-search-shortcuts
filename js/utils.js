@@ -140,6 +140,9 @@ const shortcuts = {
     target.focusElement.addEventListener('blur', removeResultHighlight);
   },
 
+  resultObserver: null,
+  scrollTimeout: null,
+
   focusResult(resultIndex) {
     const results = this.getVisibleResults();
     if (results.length === 0) return;
@@ -165,5 +168,61 @@ const shortcuts = {
     target.focusElement.focus();
     this.addResultHighlight(target);
     sessionStorage.setItem('lastLinkIndex', this.focusIndex);
+
+    if (this.resultObserver) this.resultObserver.disconnect();
+
+    // Create a new IntersectionObserver to detect if the focused link goes out of view
+    this.resultObserver = new IntersectionObserver((entries) => {
+      // Debounce scrolling event
+      clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(() => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            // If scrolling down (link is out of view from the bottom), focus the next visible result
+            if (entry.boundingClientRect.top < entry.rootBounds.top) {
+              this.focusNextVisibleResult(results);
+            }
+            // If scrolling up (link is out of view from the top), focus the previous visible result
+            else if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
+              this.focusPreviousVisibleResult(results);
+            }
+          }
+        });
+      }, 200);
+    }, {
+      root: null, // Observe relative to the viewport
+      threshold: 0 // Trigger as soon as the element goes out of view
+    });
+
+    this.resultObserver.observe(target.container);
+  },
+
+  // Function to focus the next visible result
+  focusNextVisibleResult(results) {
+    if (results.length === 0) return;
+
+    // Start searching from the current index + 1
+    for (let i = this.focusIndex + 1; i < results.length; i++) {
+      const rect = results[i].container.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+        this.focusResult(i);
+        break;
+      }
+    }
+  },
+
+  // Function to focus the previous visible result when scrolling up
+  focusPreviousVisibleResult(results) {
+    if (results.length === 0) return;
+
+    // Start searching from the current index - 1
+    for (let i = this.focusIndex - 1; i >= 0; i--) {
+      const rect = results[i].container.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+        this.focusResult(i);
+        break;
+      }
+    }
   }
 };
+
