@@ -44,10 +44,10 @@ function initShortcuts() {
     }
 
     window.addEventListener('keydown', (event) => {
-      const isInput = shortcuts.isInputActive();
+      const isInputActive = shortcuts.isInputActive();
 
       // Handle Google shortcuts
-      if (options.enableGoogleShortcuts && !isInput && !(event.altKey || event.metaKey || event.ctrlKey)) {
+      if (options.enableGoogleShortcuts && !isInputActive && !(event.altKey || event.metaKey || event.ctrlKey)) {
         switch (event.key) {
           case 'A':  // A for All
             navigateToTab('a[href^="/search"][href*="q="]:not([href*="tbm="]):not([href*="udm="])');
@@ -66,7 +66,7 @@ function initShortcuts() {
         }
       }
 
-      const isInputOrModifierActive = isInput || shortcuts.hasModifierKey(event);
+      const isInputOrModifierActive = isInputActive || shortcuts.hasModifierKey(event);
 
       const shouldNavigateNext = (options.navigateWithArrows && event.key === 'ArrowDown' && !isInputOrModifierActive) ||
         (options.navigateWithTabs && event.key === 'Tab' && !event.shiftKey) ||
@@ -107,6 +107,11 @@ function initShortcuts() {
         searchBox.focus();
       }
     });
+
+    // Simulate a click in document body to hide suggestions
+    searchBox.addEventListener('blur', () => {
+      document.querySelector('body').click();
+    })
   };
 
   shortcuts.loadOptions((options) => {
