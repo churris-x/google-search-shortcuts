@@ -37,9 +37,8 @@ function initShortcuts() {
     };
 
     const navigateToMaps = () => {
-      const searchInput = document.querySelector('input[name="q"]');
-      if (searchInput) {
-        const searchQuery = encodeURIComponent(searchInput.value);
+      if (searchBox) {
+        const searchQuery = encodeURIComponent(searchBox.value);
         window.location.href = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
       }
     }
