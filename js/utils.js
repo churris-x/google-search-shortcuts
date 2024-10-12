@@ -142,21 +142,24 @@ const shortcuts = {
 
   focusResult(resultIndex) {
     const results = this.getVisibleResults();
-
-    if (results.length === 0) {
-      return;
-    }
+    if (results.length === 0) return;
 
     // Shift focusIndex and perform boundary checks
     this.focusIndex = Math.max(0, Math.min(resultIndex, results.length - 1));
 
     const target = results[this.focusIndex];
-
-    // Scroll the entire result container into view if it's not already.
     const rect = target.container.getBoundingClientRect();
 
-    if (rect.bottom > window.innerHeight) {
-      window.scrollBy(0, rect.bottom - window.innerHeight);
+    const scrolloff = 100;
+
+    // Scroll the page if the target is too close to the bottom of the window
+    if (rect.bottom > window.innerHeight - scrolloff) {
+      window.scrollBy(0, rect.bottom - window.innerHeight + scrolloff);
+    }
+
+    // Scroll the page if the target is too close to the top of the window
+    if (rect.top < scrolloff) {
+      window.scrollBy(0, rect.top - scrolloff);
     }
 
     target.focusElement.focus();
