@@ -8,10 +8,10 @@ const shortcuts = {
     styleSelectedFancy: true,
 
     // Activate search box when any printable key is pressed
-    activateSearch: true,
+    activateSearch: false,
 
     // Automatically select the first search result.
-    autoselectFirst: false,
+    autoselectFirst: true,
 
     // Navigate between results using
 
@@ -22,16 +22,16 @@ const shortcuts = {
     navigateWithArrows: true,
 
     // Next = j; Previous = k [WARNING: Conflicts with activateSearch. This takes precedence.]
-    navigateWithJK: false,
+    navigateWithJK: true,
 
     // Esc = select all text in searchbox
-    selectTextInSearchbox: false,
+    selectTextInSearchbox: true,
 
     // Add space on focus
     addSpaceOnFocus: true,
 
     // Enable Google special bindings
-    enableGoogleShortcuts: false
+    enableGoogleShortcuts: true
   },
 
   focusIndex: -1,
