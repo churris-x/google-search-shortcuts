@@ -108,10 +108,23 @@ function initShortcuts() {
       }
     });
 
-    // Simulate a click in document body to hide suggestions
+    let clickedInsideSuggestions = false;
+    const suggestionPane = document.querySelector('div[role="presentation"]');
+
+    suggestionPane.addEventListener('mousedown', () => {
+      clickedInsideSuggestions = true;
+    });
+
+    // Simulate a click in document body to hide suggestions, but only if the search input has been blurred
+    // via an Escape or a click outside of suggestion pane. If the click is inside, don't blur to select suggestion
     searchBox.addEventListener('blur', () => {
-      document.querySelector('body').click();
-    })
+      setTimeout(() => {
+        if (!clickedInsideSuggestions) {
+          document.querySelector('body').click();
+        }
+        clickedInsideSuggestions = false;
+      }, 0);
+    });
   };
 
   shortcuts.loadOptions((options) => {
