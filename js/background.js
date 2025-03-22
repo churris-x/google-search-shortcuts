@@ -1,3 +1,9 @@
+// Given the whole debacle with Manifest V3 background.Service_Worker
+// not working as expected (see https://github.com/mozilla/web-ext/issues/2532)
+// I need to change what runs the onInstalled callback
+// Chrome AND Firefox needs to get their shit together ffs
+
+const engine = typeof browser !== "undefined" ? browser : chrome
 
 function createNotification(title, message) {
   const options = {
@@ -7,12 +13,12 @@ function createNotification(title, message) {
     message: message,
   };
 
-  chrome.notifications.create(undefined, options);
+  engine.notifications.create(undefined, options);
 }
 
 // Event listener for installation and updates
-chrome.runtime.onInstalled.addListener(details => {
-  const manifestData = chrome.runtime.getManifest();
+engine.runtime.onInstalled.addListener(details => {
+  const manifestData = engine.runtime.getManifest();
   let message;
 
   if (details.reason === 'install') {
