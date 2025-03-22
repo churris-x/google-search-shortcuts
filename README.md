@@ -21,9 +21,11 @@ This is my personal fork of an extension that adds navigation shortcuts to the g
 ## License and Acknowledgements
 All code is under the [GPL v3 license][gpl3].  
 Many thanks to Jacob Chafik and the contributors on the [original extension repository][jchafik].  
-Also thanks to Valentin Guillet for his [forked repository][Valentin-Guillet] with extended functionality and cleanup.
+Also thanks to Valentin Guillet for his [forked repository][Valentin-Guillet] with extended functionality and cleanup.  
+And finally thanks to Kuranari for his [forked repository][kuranari].
 
 
 [gpl3]: https://www.gnu.org/licenses/gpl-3.0.en.html
 [jchafik]: https://github.com/jchafik/google-search-shortcuts
 [Valentin-Guillet]: https://github.com/Valentin-Guillet/google-search-shortcuts
+[kuranari]: https://github.com/kuranari/google-search-shortcuts
