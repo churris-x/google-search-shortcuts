@@ -1,22 +1,22 @@
-
 // Globals
 const shortcuts = {
   defaultOptions: {
     // Style selected search result
     styleSelectedSimple: false,
 
+    // ?
     styleSelectedFancy: true,
 
     // Activate search box when any printable key is pressed
     activateSearch: false,
 
     // Automatically select the first search result.
-    autoselectFirst: true,
+    autoselectFirst: false,
 
     // Navigate between results using
 
     // Next = Tab; Previous = Shift + TAB
-    navigateWithTabs: true,
+    navigateWithTabs: false,
 
     // Next = Down; Previous = Up
     navigateWithArrows: true,
@@ -25,10 +25,10 @@ const shortcuts = {
     navigateWithJK: true,
 
     // Esc = select all text in searchbox
-    selectTextInSearchbox: true,
+    selectTextInSearchbox: false,
 
     // Add space on focus
-    addSpaceOnFocus: true,
+    addSpaceOnFocus: false,
 
     // Enable Google special bindings
     enableGoogleShortcuts: true
