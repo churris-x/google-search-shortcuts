@@ -1,10 +1,10 @@
 // Globals
 const shortcuts = {
   defaultOptions: {
-    // Style selected search result
+    // Add Arrow to selected result
     styleSelectedSimple: false,
 
-    // ?
+    // Add side bar to selected result
     styleSelectedFancy: true,
 
     // Activate search box when any printable key is pressed
@@ -13,15 +13,14 @@ const shortcuts = {
     // Automatically select the first search result.
     autoselectFirst: false,
 
-    // Navigate between results using
-
-    // Next = Tab; Previous = Shift + TAB
+    // Navigate with Tab /  Shift + TAB
     navigateWithTabs: false,
 
-    // Next = Down; Previous = Up
+    // Navigate with Down /  Up
     navigateWithArrows: true,
 
-    // Next = j; Previous = k [WARNING: Conflicts with activateSearch. This takes precedence.]
+    // Navigate with j /  k. "/" focuses searchbox
+    // [WARNING: Conflicts with activateSearch. This takes precedence.]
     navigateWithJK: true,
 
     // Esc = select all text in searchbox
@@ -69,8 +68,8 @@ const shortcuts = {
 
   resultContainerQuerySelector: 'div.gs_r, div.g, li, td, div[jscontroller]',
   navigationContainerQuerySelector: 'div[role="navigation"] table',
-  navigationLinksAndSuggestedSearchesQuerySelector: 'div[role="navigation"] table a, #botstuff a' +
-    // 「関連性の高い検索」を条件から外す
+  navigationLinksAndSuggestedSearchesQuerySelector: 'div[role="navigation"] table a, #botstuff a',
+    // Remove "People also search for" links
     ':not(#bres a)',
 
   saveOptions(options, callback) {
@@ -148,10 +147,7 @@ const shortcuts = {
   focusResult(offset) {
     const results = this.getVisibleResults();
 
-    if (results.length <= 0) {
-      console.warn('No results found. Extension may need to be updated.');
-      return;
-    }
+    if (results.length === 0) return;
 
     // Shift focusIndex and perform boundary checks
     this.focusIndex += offset;
@@ -163,7 +159,7 @@ const shortcuts = {
     // Scroll the entire result container into view if it's not already.
     const rect = target.container.getBoundingClientRect();
 
-    // ページの下部200pxを残してスクロールする
+    // Scroll down to 200px at the bottom of the page
     const offsetY = rect.bottom - (window.innerHeight - 200);
     if (offsetY > 0) {
       window.scrollBy(0, offsetY);
