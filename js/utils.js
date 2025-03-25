@@ -124,7 +124,7 @@ const shortcuts = {
     // Results without valid containers will be removed.
     findContainer(link, containers) {
         let container = link.closest(this.resultContainerQuerySelector);
-        // there must be a better, by old gods and new, there must be a better way
+        // there must be a better way, by the old gods and new, there must be a better way
         if (!container) {
             container = link.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
         }
@@ -139,11 +139,8 @@ const shortcuts = {
 
     // Add custom styling for the selected result (does not apply to footer navigation links)
     addResultHighlight(target) {
-        // Don't proceed if the result is already highlighted or if we're dealing with footer navigation links
-        if (
-            target.container.classList.contains('activeSearchResultContainer') ||
-            target.focusElement.closest(this.navigationContainerQuerySelector)
-        ) return;
+        // Don't proceed if the result is already highlighted
+        if (target.container.classList.contains('activeSearchResultContainer')) return;
 
         target.container.classList.add('activeSearchResultContainer');
         target.focusElement.classList.add('activeSearchResult');
