@@ -1,7 +1,6 @@
-
 'use strict';
 
-const extOptions = {};
+let extOptions = {};
 
 // Function to display a temporary dialog message
 const displayDialog = () => {
@@ -59,4 +58,3 @@ shortcuts.loadOptions(options => {
     document.getElementById('save').addEventListener('click', saveOptions);
     document.getElementById('restore').addEventListener('click', restoreDefaults);
 });
-
