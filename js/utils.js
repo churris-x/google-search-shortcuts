@@ -123,7 +123,11 @@ const shortcuts = {
     // Highlight the active result
     // Results without valid containers will be removed.
     findContainer(link, containers) {
-        const container = link.closest(this.resultContainerQuerySelector);
+        let container = link.closest(this.resultContainerQuerySelector);
+        // there must be a better, by old gods and new, there must be a better way
+        if (!container) {
+            container = link.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
+        }
 
         // Only return valid, unused containers
         if (container && !containers.includes(container)) {
