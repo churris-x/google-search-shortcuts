@@ -23,29 +23,29 @@
             const isInputOrModifierActive = shortcuts.isInputActive() || shortcuts.hasModifierKey(event)
            
             // From https://stackoverflow.com/questions/12467240/determine-if-javascript-e-keycode-is-a-printable-non-control-character
-            isPrintable =
+            const isPrintable =
                 (keyPressed >= 48 && keyPressed <= 57)   || // number keys
                 (keyPressed >= 65 && keyPressed <= 90)   || // letter keys
                 (keyPressed >= 96 && keyPressed <= 111)  || // numpad keys
                 (keyPressed >= 186 && keyPressed <= 192) || // ;=,-./` (in order)
                 (keyPressed >= 219 && keyPressed <= 222)    // [\]' (in order)
             
-            shouldNavigateNext = 
+            const shouldNavigateNext =
                 (options.navigateWithArrows && keyPressed === KEYS.DOWN && !isInputOrModifierActive) ||
                 (options.navigateWithTabs && keyPressed === KEYS.TAB && !event.shiftKey) ||
                 (options.navigateWithJK && keyPressed === KEYS.J && !isInputOrModifierActive)
                 
-            shouldNavigateBack =
+            const shouldNavigateBack =
                 (options.navigateWithArrows && keyPressed === KEYS.UP && !isInputOrModifierActive) ||
                 (options.navigateWithTabs && keyPressed === KEYS.TAB && event.shiftKey) ||
                 (options.navigateWithJK && keyPressed === KEYS.K && !isInputOrModifierActive)
                 
-            shouldActivateSearch = !isInputOrModifierActive && (
+            const shouldActivateSearch = !isInputOrModifierActive && (
                 (options.activateSearch === true && isPrintable) ||
                 (options.activateSearch !== false && keyPressed === options.activateSearch)
             )
                 
-            shouldActivateSearchAndHighlightText = !isInputOrModifierActive &&
+            const shouldActivateSearchAndHighlightText = !isInputOrModifierActive &&
                 options.selectTextInSearchbox &&
                 keyPressed === KEYS.ESC;
 
