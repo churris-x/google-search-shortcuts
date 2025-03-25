@@ -93,26 +93,18 @@ const shortcuts = {
         const containers = [];
         return [
             // Main items
-            ...Array.from(
-                document.querySelectorAll(this.visibleResultsQuerySelector),
-            ).map(element => ({
+            ...Array.from(document.querySelectorAll(this.visibleResultsQuerySelector))
+            .map(element => ({
                 container: this.findContainer(element, containers),
                 focusElement: element,
             })),
             // Suggested searches in footer and footer links
-            ...Array.from(
-                document.querySelectorAll(
-                    this.navigationLinksAndSuggestedSearchesQuerySelector,
-                ),
-            ).map(element => ({
+            ...Array.from(document.querySelectorAll(this.navigationLinksAndSuggestedSearchesQuerySelector))
+            .map(element => ({
                 container: element,
                 focusElement: element,
             })),
-        ].filter(
-            target =>
-                target.container !== null &&
-                this.isElementVisible(target.focusElement),
-        );
+        ].filter(target => target.container !== null && this.isElementVisible(target.focusElement));
     },
 
     hasModifierKey(event) {
@@ -121,11 +113,10 @@ const shortcuts = {
 
     isInputActive() {
         const activeElement = document.activeElement;
-        return (
-            activeElement &&
-            (activeElement.nodeName === 'INPUT' ||
-                this.inputElementTypes.includes(activeElement.type) ||
-                this.inputElementIds.includes(activeElement.id))
+        return activeElement && (
+            activeElement.nodeName === 'INPUT' ||
+            this.inputElementTypes.includes(activeElement.type) ||
+            this.inputElementIds.includes(activeElement.id)
         );
     },
 
@@ -182,9 +173,8 @@ const shortcuts = {
 
         // Scroll down to 200px at the bottom of the page
         const offsetY = rect.bottom - (window.innerHeight - 200);
-        if (offsetY > 0) {
-            window.scrollBy(0, offsetY);
-        }
+
+        if (offsetY > 0) window.scrollBy(0, offsetY);
 
         target.focusElement.focus();
         this.addResultHighlight(target);
