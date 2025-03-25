@@ -2,6 +2,12 @@
 
 This is my personal fork of an extension that adds navigation shortcuts to the google search page.
 
+## Table of Contents
+- [Features](#features)
+- [Todo](#todo)
+- [License and Acknowledgements](#license-and-acknowledgements)
+
+
 ## Features
 - Use `tab` and `shift + tab` to move up and down result links
 - Use `up` and `down` to move up and down results
@@ -17,6 +23,10 @@ This is my personal fork of an extension that adds navigation shortcuts to the g
 
 - **Margin Adjustment:** A minimum distance is maintained between the selected result box and the top and bottom of the page.
 
+
+## Todo
+- [ ] Make this work on firefox as well
+- [ ] Substitute [deprecated keycode property](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode)
 
 ## License and Acknowledgements
 All code is under the [GPL v3 license][gpl3].  
