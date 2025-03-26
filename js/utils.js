@@ -76,11 +76,11 @@ const shortcuts = {
         ':not(#bres a)',
 
     saveOptions(options, callback) {
-        engine.storage.local.set(options, callback);
+        engine.storage.sync.set(options, callback);
     },
 
     loadOptions(callback) {
-        engine.storage.local.get(this.defaultOptions, callback);
+        engine.storage.sync.get(this.defaultOptions, callback);
     },
 
     isElementVisible(element) {

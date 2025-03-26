@@ -26,7 +26,8 @@ This is my personal fork of an extension that adds navigation shortcuts to the g
 
 ## Todo
 - [x] Make this work on firefox as well
-- [ ] Fix storage permissions so it doesn't need to use `local` storage
+- [x] Fix storage permissions so it doesn't need to use `local` storage
+- [ ] Make it so if the options return `undefined`, default settings still load
 - [ ] Substitute [deprecated keycode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) with the [key property](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
 - [ ] Make all results, images, videos work -> find "Filters and topics" element, then closest() images link and click
 - [ ] Add ability to focus on tools?

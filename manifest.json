@@ -10,8 +10,8 @@
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
-    "author": "Valentin Guillet <guillet.valentin95240@gmail.com",
-    "homepage_url": "https://github.com/Valentin-Guillet/google-search-shortcuts",
+    "author": "Francisco Altimari <francisco@altimari.nl",
+    "homepage_url": "https://github.com/churris-x/google-search-shortcuts",
     "options_ui": {
         "page": "options.html"
     },
@@ -19,6 +19,11 @@
         "service_worker": "js/background.js",
         "scripts": ["js/background.js"],
         "type": "module"
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "francisco@altimari.nl"
+        }
     },
     "permissions": ["notifications", "storage"],
     "content_scripts": [
