@@ -2,7 +2,7 @@
     'use strict';
 
     // Enforce that the script is only run on search result pages (Google Search or Google Scholar)
-    const isResultsPage = document.querySelector( 'html[itemtype="http://schema.org/SearchResultsPage"], .gs_r');
+    const isResultsPage = document.querySelector('html[itemtype="http://schema.org/SearchResultsPage"], .gs_r');
     if (!isResultsPage) return;
 
     // Globals

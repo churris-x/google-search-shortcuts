@@ -1,3 +1,5 @@
+const engine = typeof browser !== 'undefined' ? browser : chrome;
+
 // Globals
 const shortcuts = {
     defaultOptions: {
@@ -74,11 +76,11 @@ const shortcuts = {
         ':not(#bres a)',
 
     saveOptions(options, callback) {
-        chrome.storage.sync.set(options, callback);
+        engine.storage.local.set(options, callback);
     },
 
     loadOptions(callback) {
-        chrome.storage.sync.get(this.defaultOptions, callback);
+        engine.storage.local.get(this.defaultOptions, callback);
     },
 
     isElementVisible(element) {
