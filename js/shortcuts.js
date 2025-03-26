@@ -82,7 +82,7 @@
     };
 
     // Load options
-    shortcuts.loadOptions(options => {
+    shortcuts.loadOptions((options = shortcuts.defaultOptions) => {
         addHighlightStyles(options);
         addNavigationListener(options);
 
