@@ -1,6 +1,6 @@
 # Google Search Shortcuts
 
-This is my personal fork of an extension that adds navigation shortcuts to the google search page.
+This is my personal copy of an extension that adds navigation shortcuts to the google search page.
 
 ## Table of Contents
 - [Features](#features)
