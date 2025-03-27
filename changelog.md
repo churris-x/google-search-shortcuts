@@ -2,9 +2,16 @@
 
 ## 3.0.0
 - Major refactor and personalization by Fran (churris-x)
+- Fixed result link not finding parent container because of google html changes
+- Added full list of features to readme
+- Changed indent to 4 spaces
+- Adjusted current result CSS
+- Made v3 `manifest.json`  work on Chrome and Firefox
+- Generalized browser API calls
+- Added new logo
 
 ## 2.1.1
-- Fix suggestion pane click
+- Fixed suggestion pane click
 
 ## 2.1.0
 - Automatic Link Refocus
