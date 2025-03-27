@@ -1,9 +1,9 @@
 {
     "manifest_version": 3,
     "minimum_chrome_version": "88",
-    "name": "Google Search Keyboard Shortcuts",
-    "description": "Adds keyboard shortcuts/hotkeys back to Google search results",
-    "version": "3.0.0",
+    "name": "Google Search Shortcuts",
+    "description": "Adds keyboard shortcuts to Google search results",
+    "version": "3.0.1",
     "icons": {
         "16": "img/icon16.png",
         "32": "img/icon32.png",
