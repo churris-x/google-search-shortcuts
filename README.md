@@ -28,11 +28,14 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 - [x] Fix storage permissions so it doesn't need to use `local` storage
 - [x] Make it so if the options return `undefined`, default settings still load
 - [x] Fix sidebar styling
+- [ ] Fix logo being too small
 - [ ] Substitute [deprecated keycode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) with the [key property](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
 - [ ] Make all results, images, videos work -> find "Filters and topics" element, then closest() images link and click
 - [ ] Add ability to focus on tools? And go to year? T-> time -> Y -> year
 - [ ] Fix "Add space when selecting search bar" feature
 - [ ] Fix selected result space
+- [ ] Remove "Automatically select the first result on images"
+- [ ] Allow extension on images?
 
 ## License and Acknowledgements
 All code is under the [GPL v3 license][gpl3].  
