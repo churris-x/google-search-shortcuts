@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.0.0
+- Major refactor and personalization by Fran (churris-x)
+
+## 2.1.1
+- Fix suggestion pane click
+
+## 2.1.0
+- Automatic Link Refocus
+- Dynamic Link Visibility
+- Margin Adjustment
+- Hide Suggestion Pane: 
+
+## 2.0.0
+- Major refactor to ES6 by Valentin-Guillet
+
 ## 1.1.19
 - Add bindings for other Google tabs
 
