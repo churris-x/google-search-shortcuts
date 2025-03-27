@@ -19,17 +19,20 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 - Add a space when focusing the search box
 - `a` shows all results, `i` shows images, `v` shows videos, `m` goes to maps
 
-- **Margin Adjustment:** A minimum distance is maintained between the selected result box and the top and bottom of the page.
+#### Quality of life
+- Margin Adjustment: Selected result has padding when near top or bottom of the page
 
 
 ## Todo
 - [x] Make this work on firefox as well
 - [x] Fix storage permissions so it doesn't need to use `local` storage
 - [x] Make it so if the options return `undefined`, default settings still load
+- [x] Fix sidebar styling
 - [ ] Substitute [deprecated keycode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) with the [key property](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
 - [ ] Make all results, images, videos work -> find "Filters and topics" element, then closest() images link and click
 - [ ] Add ability to focus on tools? And go to year? T-> time -> Y -> year
-- [ ] Fix add space when selecting search bar feature
+- [ ] Fix "Add space when selecting search bar" feature
+- [ ] Fix selected result space
 
 ## License and Acknowledgements
 All code is under the [GPL v3 license][gpl3].  
