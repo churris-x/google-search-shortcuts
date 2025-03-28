@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.2
+- Update crx build file
+
+## 3.0.1
+- Update Changelog
+
 ## 3.0.0
 - Major refactor and personalization by Fran (churris-x)
 - Fixed result link not finding parent container because of google html changes
