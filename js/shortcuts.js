@@ -8,14 +8,21 @@
     // Globals
     const KEYS = { UP: 38, DOWN: 40, TAB: 9, J: 74, K: 75, SLASH: 191, ESC: 27 };
 
-    const addHighlightStyles = options => {
+    const addHighlightStyles = ({styleSelectedSimple, styleSelectedFancy}) => {
         const body = document.body;
-        if (options.styleSelectedSimple || options.styleSelectedFancy) body.classList.add('useHighlight');
-        if (options.styleSelectedSimple) body.classList.add('useSimpleHighlight');
-        if (options.styleSelectedFancy) body.classList.add('useFancyHighlight');
+        if (styleSelectedSimple || styleSelectedFancy) body.classList.add('useHighlight');
+        if (styleSelectedSimple) body.classList.add('useSimpleHighlight');
+        if (styleSelectedFancy) body.classList.add('useFancyHighlight');
     };
 
-    const addNavigationListener = options => {
+    const addNavigationListener = ({
+        navigateWithTabs,
+        navigateWithArrows,
+        navigateWithJK,
+        activateSearch,
+        selectTextInSearchbox,
+        addSpaceOnFocus,
+    }) => {
         const searchBox = document.querySelector('form[role="search"] textarea:nth-of-type(1)');
 
         window.addEventListener('keydown', event => {
@@ -31,22 +38,22 @@
                 (keyPressed >= 219 && keyPressed <= 222)    // [\]' (in order)
             
             const shouldNavigateNext =
-                (options.navigateWithArrows && keyPressed === KEYS.DOWN && !isInputOrModifierActive) ||
-                (options.navigateWithTabs && keyPressed === KEYS.TAB && !event.shiftKey) ||
-                (options.navigateWithJK && keyPressed === KEYS.J && !isInputOrModifierActive)
+                (navigateWithArrows && keyPressed === KEYS.DOWN && !isInputOrModifierActive) ||
+                (navigateWithTabs && keyPressed === KEYS.TAB && !event.shiftKey) ||
+                (navigateWithJK && keyPressed === KEYS.J && !isInputOrModifierActive)
                 
             const shouldNavigateBack =
-                (options.navigateWithArrows && keyPressed === KEYS.UP && !isInputOrModifierActive) ||
-                (options.navigateWithTabs && keyPressed === KEYS.TAB && event.shiftKey) ||
-                (options.navigateWithJK && keyPressed === KEYS.K && !isInputOrModifierActive)
+                (navigateWithArrows && keyPressed === KEYS.UP && !isInputOrModifierActive) ||
+                (navigateWithTabs && keyPressed === KEYS.TAB && event.shiftKey) ||
+                (navigateWithJK && keyPressed === KEYS.K && !isInputOrModifierActive)
                 
             const shouldActivateSearch = !isInputOrModifierActive && (
-                (options.activateSearch === true && isPrintable) ||
-                (options.activateSearch !== false && keyPressed === options.activateSearch)
+                (activateSearch === true && isPrintable) ||
+                (activateSearch !== false && keyPressed === activateSearch)
             )
                 
             const shouldActivateSearchAndHighlightText = !isInputOrModifierActive &&
-                options.selectTextInSearchbox &&
+                selectTextInSearchbox &&
                 keyPressed === KEYS.ESC;
 
             if (shouldNavigateNext || shouldNavigateBack) {
@@ -55,7 +62,7 @@
                 shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
             } else if (shouldActivateSearch) {
                 // Otherwise, force caret to end of text and focus the search box
-                if (options.addSpaceOnFocus) {
+                if (addSpaceOnFocus) {
                     searchBox.value += ' ';
                 }
                 const searchBoxLength = searchBox.value.length;
@@ -72,10 +79,10 @@
             if (
                 !shortcuts.isInputActive() &&
                 !shortcuts.hasModifierKey(event) &&
-                options.navigateWithJK &&
+                navigateWithJK &&
                 event.keyCode === KEYS.SLASH
             ) {
-                if (options.addSpaceOnFocus) searchBox.value += ' ';
+                if (addSpaceOnFocus) searchBox.value += ' ';
                 searchBox.focus();
             }
         });
