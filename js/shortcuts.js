@@ -32,17 +32,17 @@
             const shouldNavigateNext =
                 (navigateWithArrows && event.key === 'ArrowDown' && !isInputOrModifierActive) ||
                 (navigateWithJK     && event.key === 'j' && !isInputOrModifierActive) ||
-                (navigateWithTabs   && event.key === 'Tab' && !event.shiftKey)
+                (navigateWithTabs   && event.key === 'Tab' && !event.shiftKey);
                 
             const shouldNavigateBack =
                 (navigateWithArrows && event.key === 'ArrowUp' && !isInputOrModifierActive) ||
                 (navigateWithJK     && event.key === 'k'   && !isInputOrModifierActive) ||
-                (navigateWithTabs   && event.key === 'Tab' && event.shiftKey)
+                (navigateWithTabs   && event.key === 'Tab' && event.shiftKey);
                 
             const shouldActivateSearch = !isInputOrModifierActive && (
                 (activateSearch === true && isPrintable) ||
                 (activateSearch !== false && event.key === activateSearch)
-            )
+            );
                 
             const shouldActivateSearchAndHighlightText = !isInputOrModifierActive &&
                 selectTextInSearchbox && event.key === 'Escape';
@@ -53,10 +53,10 @@
                 shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
             } else if (shouldActivateSearch) {
                 // Otherwise, force caret to end of text and focus the search box
-                if (addSpaceOnFocus) {
-                    searchBox.value += ' ';
-                }
+                if (addSpaceOnFocus) searchBox.value += ' ';
+
                 const searchBoxLength = searchBox.value.length;
+
                 searchBox.focus();
                 searchBox.setSelectionRange(searchBoxLength, searchBoxLength);
             } else if (shouldActivateSearchAndHighlightText) {
@@ -84,9 +84,6 @@
         addHighlightStyles(options);
         addNavigationListener(options);
 
-        // Auto select the first search result
-        if (options.autoselectFirst === true) {
-            shortcuts.focusResult(1);
-        }
+        if (options.autoselectFirst) shortcuts.focusResult(1);
     });
 })();

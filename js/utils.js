@@ -125,7 +125,6 @@ const shortcuts = {
     },
 
     // Highlight the active result
-    // Results without valid containers will be removed.
     findContainer(link, containers) {
         let container = link.closest(this.resultContainerQuerySelector);
         // there must be a better way, by the old gods and new, there must be a better way
