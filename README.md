@@ -5,7 +5,8 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 ## Table of Contents
 - [Features](#features)
 - [Todo](#todo)
-- [License and Acknowledgements](#license-and-acknowledgements)
+- [Build & Install](#build--install)
+- [License & Acknowledgements](#license--acknowledgements)
 
 
 ## Features
@@ -38,7 +39,16 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 - [ ] Remove "Automatically select the first result on images"
 - [ ] Allow extension on images?
 
-## License and Acknowledgements
+## Build & Install
+To use this extension in it's unpacked form you need to:
+
+1. Clone the repository
+2. Go to `chrome://extensions/` and click on load unpacked
+3. Select the folder of the cloned repository
+
+To build same as above but on chrome extensions click on Pack extension to get the `.crx` build file.
+
+## License & Acknowledgements
 All code is under the [GPL v3 license][gpl3].  
 Many thanks to Jacob Chafik and the contributors on the [original extension repository][jchafik].  
 Also thanks to Valentin Guillet for his [forked repository][Valentin-Guillet] with extended functionality and cleanup.  
