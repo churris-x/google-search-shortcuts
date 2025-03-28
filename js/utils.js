@@ -1,3 +1,5 @@
+'use strict';
+
 const engine = typeof browser !== 'undefined' ? browser : chrome;
 
 // Globals
