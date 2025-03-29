@@ -8,7 +8,7 @@ const engine = typeof browser !== 'undefined' ? browser : chrome;
 const createNotification = (title, message) => {
     const options = {
         type: 'basic',
-        iconUrl: '../img/icon128.png',
+        iconUrl: '/img/icon128.png',
         title: title,
         message: message,
     };
