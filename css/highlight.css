@@ -30,7 +30,6 @@ body.useSimpleHighlight .activeSearchResult {
 }
 
 /* Nav bar styleing */
-
 div[role='navigation'] table a:focus {
     text-decoration: underline;
 }

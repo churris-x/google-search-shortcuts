@@ -1,12 +1,8 @@
 # Build
 *.zip
-*.sh
-*.patch
 
-# System Files
+# Mac folder
 .DS_Store
 
 # IDE
 .idea/
-
-google-search-shortcuts.pem
