@@ -70,7 +70,7 @@ const shortcuts = {
         // hidden ancestor element.
         ':not([aria-hidden="true"] a)',
 
-    resultContainerQuerySelector: 'div.gs_r, div.g, li, td, div[jscontroller]',
+    resultContainerQuerySelector: 'div.gs_r, div.g, li, td, div[jscontroller], div[data-news-cluster-id]',
     navigationContainerQuerySelector: 'div[role="navigation"] table',
     navigationLinksAndSuggestedSearchesQuerySelector:
         'div[role="navigation"] table a, #botstuff a' +
