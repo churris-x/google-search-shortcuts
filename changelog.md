@@ -15,6 +15,7 @@
 - Made v3 `manifest.json`  work on Chrome and Firefox
 - Generalized browser API calls
 - Added new logo
+- If options cannot be loaded, use default settings
 
 ## 2.1.1
 - Fixed suggestion pane click
