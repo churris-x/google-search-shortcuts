@@ -27,6 +27,7 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 ## Todo
 - [x] Substitute [deprecated keycode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) with the [key property](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
 - [x] Fix bug on news results and news tab
+- [x] Allow options to be opened directly on the extension icon
 - [ ] Create build action
 - [ ] Automate deploy process
 - [ ] Remove "Automatically select the first result on images"
@@ -37,8 +38,7 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 - [ ] Allow extension on images?
 - [ ] Allow to rebind j & k
 - [ ] Remove install & update notification?
-- [ ] Allow options to be opened directly on the extension icon
-    - [ ] Add message notifying user to refresh
+- [ ] Add message notifying user to refresh page when settings are changed
 
 ## Build & Install
 To use this extension in it's unpacked form you need to:
