@@ -21,6 +21,7 @@
         }
 
         table {
+            width: 100%;
             border-spacing: 0;
 
             code {
@@ -30,7 +31,12 @@
                 background-color: #818b981f;
             }
 
-
+            tr:nth-child(even) {
+                background-color: #f7f8fa;
+                code {
+                    background-color: #717b881f;
+                }
+            }
 
             td:nth-child(3) {
                 padding-left: 30px;
@@ -46,7 +52,12 @@
             }
         }
 
-
+        #features > div:nth-child(even) {
+            background-color: #f7f8fa;
+                code {
+                    background-color: #717b881f;
+                }
+        }
 
         #dialog {
             text-align: center;
