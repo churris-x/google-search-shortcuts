@@ -34,6 +34,7 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 - [ ] Align `options.html` rows
 - [ ] Make all results, images, videos work -> find "Filters and topics" element, then closest() images link and click
 - [ ] Add ability to focus on tools? And go to year? T-> time -> Y -> year
+    - [ ] Add to vim mode, H and L now move the top bar
 - [ ] Fix "Add space when selecting search bar" feature
 - [ ] Allow extension on images?
 - [ ] Allow to rebind j & k
