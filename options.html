@@ -7,7 +7,7 @@
         body {
             margin: 0 auto 10px;
             width: 500px;
-            padding: 10px 20px 20px;
+            padding: 0 20px;
             font-size: 12px;
         }
 
@@ -20,26 +20,33 @@
             cursor: pointer;
         }
 
-        .accent {
-            color: #339eca;
+        table {
+            border-spacing: 0;
+
+            code {
+                border-radius: 4px;
+                padding: 2px;
+                font-size: 10px;
+                background-color: #818b981f;
+            }
+
+
+
+            td:nth-child(3) {
+                padding-left: 30px;
+            }
         }
 
-        tr td:first-child {
-        }
-
-        tr td:nth-child(2) {
-            font-size: smaller;
-            padding-left: 20px;
-            color: #666;
-        }
-
-        label {
-            padding-left: 4px;
-        }
-
-        #otherFeatures > div {
+        #features > div {
             margin-bottom: 4px;
+            align-items: center;
+            display: flex;
+            label {
+                padding-left: 4px;
+            }
         }
+
+
 
         #dialog {
             text-align: center;
@@ -52,64 +59,75 @@
             top: 15px;
             right: 15px;
         }
-
-        #thanks {
-            text-align: center;
-            margin: 30px 0 0;
-        }
-
-        td {
-            vertical-align: top;
-        }
     </style>
 </head>
 <body>
     <h2>Navigate Between Search Results Using</h2>
-    <table border="0" cellspacing="0" cellspacing="2">
-        <tr><td><input type="checkbox" id="navigateWithTabs" />
-            <label for="navigateWithTabs">TAB Key</label>
-        </td><td>
-            (<strong>TAB</strong> = next result; <strong>Shift + TAB</strong> = previous result)
-        </td></tr>
-        <tr><td><input type="checkbox" id="navigateWithArrows" />
-            <label for="navigateWithArrows">Arrow Keys</label>
-        </td><td>
-            (<strong>Down</strong> = next result; <strong>Up</strong> = previous result)
-        </td></tr>
-        <tr><td><input type="checkbox" id="navigateWithJK" />
-            <label for="navigateWithJK" >Vim Style</label>
-        </td><td>
-            (<strong>J</strong> = next result; <strong>K</strong> = previous result; <strong>/</strong> = focus the search box)
-            <div>
-                <strong>NOTE</strong>: When selected, we recommend disabling search focus on <em>any</em> key.
-            </div>
-        </td></tr>
-        <tr><td><input type="checkbox" id="selectTextInSearchbox" />
-            <label for="selectTextInSearchbox" >ESC Key</label>
-        </td><td>
-            (<strong>ESC</strong> = select all text in searchbox)
-        </td></tr>
+
+    <table>
+        <tr>
+            <td><input type="checkbox" id="navigateWithTabs" /></td>
+            <td><label for="navigateWithTabs">TAB</label></td>
+            <td><code>Tab</code> next result, <code>Shift + Tab</code> previous result</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="navigateWithArrows" /></td>
+            <td><label for="navigateWithArrows">Arrow Keys</label></td>
+            <td><code>Down</code> next result, <code>Up</code> previous result</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="navigateWithJK" /></td>
+            <td><label for="navigateWithJK" >Vim Style</label></td>
+            <td>
+                <code>J</code> next result, <code>K</code> previous result, <code>/</code> focus the search box
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="selectTextInSearchbox" /></td>
+            <td><label for="selectTextInSearchbox">Esc Key</label></td>
+            <td><code>Esc</code> select all text in searchbox</td>
+        </tr>
     </table>
-    <br />
+
+    <br/>
+
     <h2>Other Features</h2>
-    <div id="otherFeatures">
-        <div><input type="checkbox" id="styleSelectedSimple" />
-            <label for="styleSelectedSimple">Prepend an arrow to the selected search result</label>
+    <div id="features">
+        <div>
+            <input type="checkbox" id="styleSelectedSimple" />
+            <label for="styleSelectedSimple">
+            Prepend an arrow to the selected search result
+        </label>
         </div>
-        <div><input type="checkbox" id="styleSelectedFancy" />
-            <label for="styleSelectedFancy">Add additional styling to the selected search result</label>
+        <div>
+            <input type="checkbox" id="styleSelectedFancy" />
+            <label for="styleSelectedFancy">
+            Add additional styling to the selected search result
+        </label>
         </div>
-        <div><input type="checkbox" id="activateSearch" />
-            <label for="activateSearch">Focus the search box when any key is pressed</label>
+        <div>
+            <input type="checkbox" id="activateSearch" />
+            <label for="activateSearch">
+            Focus the search box when any key is pressed
+        </label>
         </div>
-        <div><input type="checkbox" id="autoselectFirst" />
-            <label for="autoselectFirst">Automatically select the first search result<em>(experimental)</em></label>
+        <div>
+            <input type="checkbox" id="autoselectFirst" />
+            <label for="autoselectFirst">
+                Automatically select the first search result <em>(experimental)</em>
+            </label>
         </div>
-        <div><input type="checkbox" id="addSpaceOnFocus" />
-            <label for="addSpaceOnFocus">Add a space when focusing the search box</label>
+        <div>
+            <input type="checkbox" id="addSpaceOnFocus" />
+            <label for="addSpaceOnFocus">
+            Add a space when focusing the search box
+        </label>
         </div>
-        <div><input type="checkbox" id="enableGoogleShortcuts" />
-            <label for="enableGoogleShortcuts">Enable: [A]ll, [I]mages, [V]ideo,[M]aps</label>
+        <div>
+            <input type="checkbox" id="enableGoogleShortcuts" />
+            <label for="enableGoogleShortcuts">
+            Enable: [A]ll, [I]mages, [V]ideo,[M]aps
+        </label>
         </div>
     </div>
     <br /><br />
