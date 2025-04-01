@@ -2,6 +2,8 @@
 
 This is my personal copy of an extension that adds navigation shortcuts to the google search page.
 
+<img src="img/Chrome-store-screenshot.jpg" width="500"/>
+
 ## Table of Contents
 - [Features](#features)
 - [Todo](#todo)
