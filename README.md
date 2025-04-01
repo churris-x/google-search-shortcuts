@@ -25,10 +25,6 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 
 
 ## Todo
-- [x] Substitute [deprecated keycode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) with the [key property](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
-- [x] Fix bug on news results and news tab
-- [x] Allow options to be opened directly on the extension icon
-- [x] Align `options.html` rows
 - [ ] Create build action
 - [ ] Automate deploy process
 - [ ] Remove "Automatically select the first result on images"

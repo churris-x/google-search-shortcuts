@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.3
+- Substituted [deprecated keycode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) with the [key property](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
+- Fixed bug on news results and news tab
+- Options.html now open as a popup by clicking on the icon
+- Improved options design
+- Code refactor and cleanup
+- Added build instructions to comply with GPL v3 license
+
 ## 3.0.2
 - Update crx build file
 
