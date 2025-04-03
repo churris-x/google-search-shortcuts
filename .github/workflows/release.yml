@@ -1,0 +1,10 @@
+name: release
+
+on: [push]
+jobs:
+    Testing-stuff:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+            - run: echo ${{secrets.CHROME_CLIENT_ID}} and ${{CHROME_CLIENT_SECRET}}
+            - run: echo "🍏 This job's status is ${{ job.status }}."
