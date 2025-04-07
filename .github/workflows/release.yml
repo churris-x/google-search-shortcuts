@@ -1,23 +1,47 @@
 name: release
 
+# zip_build
+
+# Check tag is greater than last deploy
+# ie: 2.2.3 should not trigger a release if the last one was 3.0.1
 
 # Chrome
 # 1. zip files
-#
-
 
 # Firefox
-# 1. pack extension
+# 1. pack extension xpi
 # 2.
 
 
 on:
-    push:
-        tags:
-            - 'v*.*.*'
+  push:
+    tags:
+      - 'v*.*.*'
+    workflow_dispatch:
+
 jobs:
-    Testing-stuff:
-        runs-on: ubuntu-latest
-        steps:
-            - run: echo '🎉 The job was automatically triggered by a ${{ github.event_name }} event.'
-            - run: echo '🍏 This job's status is ${{ job.status }}.'
+  check_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: |
+          git fetch --tags
+          CURRENT=$(jq -r '.version' manifest.json)
+          LATEST=$(git tag | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | tail -1)
+          echo Latest version is $LATEST, current version is $CURRENT
+          [[ $CURRENT < $LATEST ]] && exit 1
+          echo all good
+
+  # zip_build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo 'hello there'
+
+  # deploy-chrome:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo '🎉 The job was automatically triggered by a ${{ github.event_name }} event.'
+  #     - run: echo 'status is ${{ job.status }}'
