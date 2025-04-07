@@ -37,6 +37,7 @@ jobs:
           fi
           echo "Version $CURRENT is valid, continuing to build"
   zip_build:
+    needs: check_version
     runs-on: ubuntu-latest
     steps:
       - run: echo 'hello there'
