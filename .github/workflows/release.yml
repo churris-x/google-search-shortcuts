@@ -28,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-          git fetch --tags
+          git fetch --tags --force
           CURRENT=$(jq -r '.version' manifest.json)
           LATEST=$(git tag | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | tail -1)
           echo Latest version is $LATEST, current version is $CURRENT
