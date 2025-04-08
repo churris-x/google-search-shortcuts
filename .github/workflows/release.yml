@@ -2,12 +2,6 @@ name: release
 
 # zip_build
 
-# Check tag is greater than last deploy
-# ie: 2.2.3 should not trigger a release if the last one was 3.0.1
-
-# Chrome
-# 1. zip files
-
 # Firefox
 # 1. pack extension xpi
 # 2.
@@ -31,8 +25,8 @@ jobs:
           git fetch --tags --force
           CURRENT=$(jq -r '.version' manifest.json)
           LATEST=$(git tag | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | tail -1)
-          if [[ $CURRENT < $LATEST ]]; then
-            echo "ERROR: current mainfest version $CURRENT is lower than latest version $LATEST"
+          if [[ $CURRENT -lt $LATEST ]]; then
+            echo "ERROR: current manifest version $CURRENT is lower than latest version $LATEST"
             exit 1
           fi
           echo "Version $CURRENT is valid, continuing to build"
