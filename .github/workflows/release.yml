@@ -1,27 +1,26 @@
 name: release
 
-# zip_build
-
-# Firefox
-# 1. pack extension xpi
-# 2.
-
-
 on:
   push:
     tags:
       - 'v*.*.*'
     workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  check_version:
+  create_release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: |
+      - name: Compare Version
+        run: |
           CURRENT=v$(jq -r '.version' manifest.json)
           LATEST=$(git tag | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | tail -1)
           if [[ "$CURRENT" < "$LATEST" ]]; then
@@ -29,24 +28,24 @@ jobs:
             exit 1
           fi
           echo "Version $CURRENT is >= to latest $LATEST, continuing to build"
+      - name: Githu release
+        run: |
+          VERSION=$(jq -r '.version' info.json)
+          NOTES=$(git log -1 --format='## Changes:%n%b')
+          gh release create "v$VERSION" --notes "$NOTES"
 
 
-
-
-  # zip_build:
+# Change zip into xpi
+  # deploy_firefox:
   #   needs: check_version
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - name: Create XPI (zip)
-  #       run: zip -r extension.xpi .
-  #     - name: Upload XPI
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: extension-xpi
-  #         path: extension.xpi
+  #     - run: echo '🎉 The job was automatically triggered by a ${{ github.event_name }} event.'
+  #     - run: echo 'status is ${{ job.status }}'
 
 
-  # deploy-chrome:
+  # deploy_chrome:
+  #   needs: check_version
   #   runs-on: ubuntu-latest
   #   steps:
   #     - run: echo '🎉 The job was automatically triggered by a ${{ github.event_name }} event.'
