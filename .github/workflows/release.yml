@@ -10,6 +10,7 @@ permissions:
   contents: write
 
 jobs:
+  # If version is increasing, create github release
   create_release:
     runs-on: ubuntu-latest
     env:
@@ -35,18 +36,22 @@ jobs:
           gh release create "v$VERSION" --notes "$NOTES"
 
 
-# Change zip into xpi
+  # Change zip into xpi
   # deploy_firefox:
   #   needs: check_version
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - run: echo '🎉 The job was automatically triggered by a ${{ github.event_name }} event.'
-  #     - run: echo 'status is ${{ job.status }}'
+  #     - name: Download source zip
+  #       run: |
+  #         curl -L "https://github.com/${{ github.repository }}/archive/refs/tags/${{ github.ref_name }}.zip" -o source.zip
 
-
+  # Upload release zip to chrome store
   # deploy_chrome:
   #   needs: check_version
   #   runs-on: ubuntu-latest
   #   steps:
   #     - run: echo '🎉 The job was automatically triggered by a ${{ github.event_name }} event.'
+  #     - run: |
+  #       ZIP_URL="https://github.com/${{ github.repository }}/archive/refs/tags/${{ github.ref_name }}.zip"
+  #       echo "Download URL: $ZIP_URL"
   #     - run: echo 'status is ${{ job.status }}'
