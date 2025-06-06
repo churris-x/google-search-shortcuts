@@ -44,14 +44,18 @@ jobs:
   #     - name: Download source zip
   #       run: |
   #         curl -L "https://github.com/${{ github.repository }}/archive/refs/tags/${{ github.ref_name }}.zip" -o source.zip
+  #     - name: Create xpi
+  #       run: mv source.zip source.xpi
+  #     - name: Upload xpi
+  #       run: |
+  #         gh release upload ${{ github.ref_name }} ./source.xpi
 
   # Upload release zip to chrome store
   # deploy_chrome:
   #   needs: check_version
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - run: echo '🎉 The job was automatically triggered by a ${{ github.event_name }} event.'
-  #     - run: |
+  #     - name: Create zip url link
+  #       run: |
   #       ZIP_URL="https://github.com/${{ github.repository }}/archive/refs/tags/${{ github.ref_name }}.zip"
   #       echo "Download URL: $ZIP_URL"
-  #     - run: echo 'status is ${{ job.status }}'
