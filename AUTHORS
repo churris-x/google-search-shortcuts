@@ -1,0 +1,28 @@
+#
+# Master author manifest for google-search-shortcuts
+#
+# <filename> <authors> (first is original author)
+#
+.editorconfig                       Francisco Altimari
+.gitignore                          Jacob Chafik, Francisco Altimari
+.prettierrc                         Francisco Altimari
+AUTHORS                             Francisco Altimari
+CHANGELOG.md                        Jacob Chafik, Valentin Guillet, Francisco Altimari
+LICENSE                             Jacob Chafik
+README.md                           Jacob Chafik, Valentin Guillet, Francisco Altimari
+google-search-shortcuts.crx         Jacob Chafik, Valentin Guillet, Francisco Altimari
+manifest.json                       Jacob Chafik, Valentin Guillet, Francisco Altimari
+options.html                        Jacob Chafik, Tobias Wyss, João Barreiros, Valentin Guillet, Francisco Altimari
+.github/workflows/release.yml       Francisco Altimari
+css/highlight.css                   Jacob Chafik, Matthias Kunnen, Francisco Altimari
+img/Chrome-store-screenshot.jpg     Jacob Chafik, Francisco Altimari
+img/icon.svg                        Jacob Chafik, Francisco Altimari
+img/icon128.png                     Jacob Chafik, Francisco Altimari
+img/icon16.png                      Jacob Chafik, Francisco Altimari
+img/icon32.png                      Jacob Chafik, Francisco Altimari
+img/icon48.png                      Jacob Chafik, Francisco Altimari
+img/icon64.png                      Jacob Chafik, Francisco Altimari
+js/background.js                    Jacob Chafik, Valentin Guillet, Francisco Altimari
+js/options.js                       Jacob Chafik, Tobias Wyss, João Barreiros, Valentin Guillet, Francisco Altimari
+js/shortcuts.js                     Jacob Chafik, Tobias Wyss, João Barreiros, Valentin Guillet, Francisco Altimari
+js/utils.js                         Jacob Chafik, Tobias Wyss, Pat Needham, Matthias Kunne, João Barreiros, Jan Buschtöns, Valentin-Guillet, Francisco Altimari
