@@ -29,16 +29,16 @@ jobs:
             exit 1
           fi
           echo "Version $CURRENT is >= to latest $LATEST, continuing to build"
-      - name: Githu release
+      - name: Github release
         run: |
-          VERSION=$(jq -r '.version' info.json)
+          VERSION=$(jq -r '.version' manifest.json)
           NOTES=$(git log -1 --format='## Changes:%n%b')
           gh release create "v$VERSION" --notes "$NOTES"
 
 
   # Change zip into xpi
   # deploy_firefox:
-  #   needs: check_version
+  #   needs: create_release
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Download source zip
@@ -52,7 +52,7 @@ jobs:
 
   # Upload release zip to chrome store
   # deploy_chrome:
-  #   needs: check_version
+  #   needs: create_release
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Create zip url link
