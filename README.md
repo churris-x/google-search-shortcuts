@@ -28,6 +28,7 @@ This is my personal copy of an extension that adds navigation shortcuts to the g
 
 ## Todo
 - [ ] Create build action
+- [ ] Figure out how to create the crx file
 - [ ] Automate deploy process
 - [ ] Remove "Automatically select the first result on images"
 - [ ] Make all results, images, videos work -> find "Filters and topics" element, then closest() images link and click
