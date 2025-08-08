@@ -1,0 +1,5 @@
+.git/                        export-ignore
+.github/                     export-ignore
+.gitignore                   export-ignore
+google-search-shortcuts.crx  export-ignore
+google-search-shortcuts.xpi  export-ignore
