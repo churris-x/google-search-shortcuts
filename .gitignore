@@ -1,5 +1,7 @@
 # Build
 *.zip
+*.crx
+*.xpi
 
 # Mac folder
 .DS_Store
